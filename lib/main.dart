@@ -10,7 +10,16 @@ import 'firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  final SharedPreferences preferences = await SharedPreferences.getInstance();
+
+  SharedPreferences? preferences;
+  try {
+    preferences = await SharedPreferences.getInstance().timeout(
+      const Duration(seconds: 2),
+    );
+  } on Object {
+    preferences = null;
+  }
+
   runApp(
     ProviderScope(
       overrides: [sharedPreferencesProvider.overrideWithValue(preferences)],

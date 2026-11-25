@@ -251,7 +251,10 @@ class _FormPanel extends StatelessWidget {
           Row(
             children: [
               if (showBrand)
-                const BrandLockup(markSize: 34)
+                BrandLockup(
+                  markSize: 34,
+                  compact: MediaQuery.sizeOf(context).width < 380,
+                )
               else
                 const SizedBox.shrink(),
               const Spacer(),

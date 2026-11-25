@@ -125,25 +125,34 @@ class BalanceHero extends StatelessWidget {
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      Text(
-                        isCurrentMonth
-                            ? 'Cumulative spend so far'
-                            : 'Cumulative spend',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.4,
-                          color: Colors.white.withValues(alpha: 0.38),
+                      Expanded(
+                        child: Text(
+                          isCurrentMonth
+                              ? 'Cumulative spend so far'
+                              : 'Cumulative spend',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.4,
+                            color: Colors.white.withValues(alpha: 0.38),
+                          ),
                         ),
                       ),
-                      const Spacer(),
-                      Text(
-                        'DAY 1 – ${cumulative.length}',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1.2,
-                          color: Colors.white.withValues(alpha: 0.38),
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Text(
+                          'DAY 1 – ${cumulative.length}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 1.2,
+                            color: Colors.white.withValues(alpha: 0.38),
+                          ),
                         ),
                       ),
                     ],

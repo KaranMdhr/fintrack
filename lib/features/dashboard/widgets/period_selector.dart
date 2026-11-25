@@ -18,6 +18,7 @@ class PeriodSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool compact = MediaQuery.sizeOf(context).width < 400;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
@@ -39,7 +40,9 @@ class PeriodSelector extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),
             child: Text(
-              AppFormatters.month(month),
+              compact
+                  ? AppFormatters.shortMonth(month)
+                  : AppFormatters.month(month),
               style: theme.textTheme.labelLarge?.copyWith(
                 fontWeight: FontWeight.w700,
               ),

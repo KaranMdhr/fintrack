@@ -55,19 +55,28 @@ class MonthPaceCard extends ConsumerWidget {
           const SizedBox(height: 20),
           Row(
             children: [
-              Text(
-                'PERIOD PROGRESS',
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  letterSpacing: 1.4,
+              Expanded(
+                child: Text(
+                  'PERIOD PROGRESS',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    letterSpacing: 1.4,
+                  ),
                 ),
               ),
-              const Spacer(),
-              Text(
-                '$daysElapsed / $daysInMonth days',
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  letterSpacing: 0.2,
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  '$daysElapsed / $daysInMonth days',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.right,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    letterSpacing: 0.2,
+                  ),
                 ),
               ),
             ],

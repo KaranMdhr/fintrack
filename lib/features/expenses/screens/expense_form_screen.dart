@@ -271,6 +271,7 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
                             const SizedBox(height: 16),
                             DropdownButtonFormField<String>(
                               initialValue: _category,
+                              isExpanded: true,
                               enabled: !_isSaving,
                               decoration: const InputDecoration(
                                 labelText: 'Category',
@@ -291,7 +292,13 @@ class _ExpenseFormScreenState extends ConsumerState<ExpenseFormScreen> {
                                             ),
                                           ),
                                           const SizedBox(width: 9),
-                                          Text(category),
+                                          Flexible(
+                                            child: Text(
+                                              category,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../storage/preferences_provider.dart';
 import 'app_currency.dart';
@@ -11,10 +12,9 @@ class CurrencyNotifier extends Notifier<AppCurrency> {
 
   @override
   AppCurrency build() {
-    final String? savedCode = ref
-        .watch(sharedPreferencesProvider)
-        .getString(_storageKey);
-    return AppCurrencies.byCode(savedCode) ?? AppCurrencies.usd;
+    final SharedPreferences? preferences = ref.watch(sharedPreferencesProvider);
+    return AppCurrencies.byCode(preferences?.getString(_storageKey)) ??
+        AppCurrencies.usd;
   }
 
   Future<void> setCurrency(AppCurrency currency) async {
@@ -22,6 +22,6 @@ class CurrencyNotifier extends Notifier<AppCurrency> {
     state = currency;
     await ref
         .read(sharedPreferencesProvider)
-        .setString(_storageKey, currency.code);
+        ?.setString(_storageKey, currency.code);
   }
 }

@@ -6,6 +6,7 @@ abstract final class AppFormatters {
   static final Map<String, NumberFormat> _currencyFormats =
       <String, NumberFormat>{};
   static final DateFormat _month = DateFormat('MMMM yyyy');
+  static final DateFormat _shortMonth = DateFormat('MMM yyyy');
   static final DateFormat _day = DateFormat('EEEE, MMM d');
   static final DateFormat _shortDate = DateFormat('MMM d, yyyy');
 
@@ -29,6 +30,8 @@ abstract final class AppFormatters {
   }
 
   static String month(DateTime date) => _month.format(date);
+
+  static String shortMonth(DateTime date) => _shortMonth.format(date);
 
   static String day(DateTime date) => _day.format(date);
 

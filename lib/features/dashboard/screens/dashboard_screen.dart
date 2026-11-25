@@ -370,15 +370,15 @@ class _DashboardHeader extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 20),
-        Row(
-          children: [
-            PeriodSelector(
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final bool compact = constraints.maxWidth < 480;
+            final Widget selector = PeriodSelector(
               month: month,
               onPrevious: onPrevious,
               onNext: onNext,
-            ),
-            const Spacer(),
-            FilledButton.icon(
+            );
+            final Widget addButton = FilledButton.icon(
               onPressed: onAdd,
               icon: const Icon(Icons.add_rounded, size: 18),
               label: Text(wide ? 'Add expense' : 'Add'),
@@ -386,8 +386,21 @@ class _DashboardHeader extends StatelessWidget {
                 minimumSize: const Size(0, 46),
                 padding: const EdgeInsets.symmetric(horizontal: 18),
               ),
-            ),
-          ],
+            );
+
+            if (compact) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Align(alignment: Alignment.centerLeft, child: selector),
+                  const SizedBox(height: 10),
+                  addButton,
+                ],
+              );
+            }
+
+            return Row(children: [selector, const Spacer(), addButton]);
+          },
         ),
       ],
     );
