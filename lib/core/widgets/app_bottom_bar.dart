@@ -51,6 +51,7 @@ class AppBottomBar extends StatelessWidget {
       top: false,
       minimum: const EdgeInsets.fromLTRB(16, 0, 16, 16),
       child: Center(
+        heightFactor: 1,
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 460),
           child: ClipRRect(

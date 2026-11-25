@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:expense_tracker/core/storage/preferences_provider.dart';
 import 'package:expense_tracker/core/theme/app_theme.dart';
+import 'package:expense_tracker/core/widgets/app_bottom_bar.dart';
 import 'package:expense_tracker/features/auth/providers/auth_providers.dart';
 import 'package:expense_tracker/features/auth/screens/login_screen.dart';
 import 'package:expense_tracker/features/dashboard/screens/dashboard_screen.dart';
@@ -75,6 +76,28 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
   }
+
+  testWidgets('bottom bar keeps intrinsic height on mobile', (tester) async {
+    tester.view.physicalSize = const Size(780, 1688);
+    tester.view.devicePixelRatio = 2;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.dark,
+        home: Scaffold(
+          body: const SizedBox.expand(),
+          bottomNavigationBar: AppBottomBar(index: 0, onTap: (_) {}),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final Rect rect = tester.getRect(find.byType(AppBottomBar));
+    expect(rect.height, lessThan(160));
+    expect(rect.bottom, closeTo(844, 1));
+  });
 
   for (final double width in <double>[320, 360, 390, 430]) {
     testWidgets('dashboard fits at ${width.toInt()}px', (tester) async {
